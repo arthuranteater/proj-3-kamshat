@@ -3,6 +3,7 @@ import { useRef, useState, useEffect} from "react";
 import { motion, useCycle } from "framer-motion";
 import { useDimensions } from "../../utils/useDimensions";
 import { MenuToggle } from "../../components/MenuToggle";
+import CityForm from "../../components/CityForm/index";
 import "./style.css";
 
 // const colors = ["#FF008C", "#D309E1", "#9C1AFF", "#7700FF", "#4400FF"]
@@ -35,7 +36,7 @@ const variantsLi = {
     }
   },
   closed: {
-    y: 10,
+    y: 20,
     opacity: 0,
     transition: {
       y: { stiffness: 1000 }
@@ -52,10 +53,6 @@ const variants = {
   }
 };
 
-const form = {
-
-}
-
 
 const continents = ["North America", "South America", "Europe", "Asia", "Oceania", "Antarctica", "Africa"];
 
@@ -66,12 +63,21 @@ const Home = () => {
   const [currentInput, setCurrentInput] = useState(
     ""
   )
+
+  const [clickedCountry, setClickedCountry] = useState(
+    null
+  )
   const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
   const [temporaryObject, setTemporaryObject] = useState({
     "North America": [],
     "South America": [],
+    "Europe": [],
+    "Asia": [],
+    "Oceania": [],
+    "Antarctica": [],
+    "Africa": []
   })
 
   useEffect(
@@ -80,18 +86,19 @@ const Home = () => {
     }, 
     [temporaryObject]
   )
+
   const handleAdd = e => {
-    const clickedCountry = e.target.getAttribute("data");
-    setClickedContinent(clickedCountry)
+    const addedCountry = e.target.getAttribute("data");
+    setClickedContinent(addedCountry)
   }
 
   const handleInput = e => {
-    const userValue = e.target.value
-    setCurrentInput(userValue)
+    console.log(e.target.value)
+    const userInput = e.target.value
+    setCurrentInput(userInput)
   }
 
-  const handleAddCountry = e => {
-  console.log(currentInput)
+  const handleAddCountry = () => {
   setTemporaryObject({
     ...temporaryObject,
     [clickedContinent]:
@@ -100,19 +107,20 @@ const Home = () => {
        currentInput   
       ]
   })
-  // console.log(temporaryObject)
+}
 
+const handleClickedCountry = (e) => {
+  console.log(e.target)
 }
 
   const input = (
-    <div style={{marginTop: 10, display: "inline-block", width: 50}}>
-      <input type="text" onChange={handleInput}/>
-      <button onClick={handleAddCountry}>Add</button>
+    <div className="input-field">
+      <input className="text-placeholder" type="text" onChange={handleInput} style={{width: 80}}/>
+      <button className="icon-placeholder" onClick={handleAddCountry}>Add</button>
     </div>
   )
 
-  return (
-    
+  return ( 
     <motion.div
       exit={{ opacity: 0 }}
       initial={{ opacity: 0 }}
@@ -130,12 +138,15 @@ const Home = () => {
             <>
             <motion.li
             variants={variantsLi}
-            whileHover={{ scale: 1 }}
-            whileTap={{ scale: 0.95 }}
             key={c}>
             {c}
-            <i onClick={handleAdd} className="fa fa-plus-circle" data={c}>Add Country</i>
+            <i onClick={handleAdd} className="fa fa-plus-circle" data={c}></i>
             {clickedContinent === c && input}
+            {/* <ul>
+            {temporaryObject.map(country => 
+              <li>{country}</li>
+            )}
+            </ul> */}
             </motion.li>
             </>
             )}
