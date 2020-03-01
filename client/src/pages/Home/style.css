@@ -1,18 +1,6 @@
-body {
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(360deg, #e46b1b 0%, rgb(233, 193, 14) 100%);
-    overflow: hidden;
-    padding: 0;
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
   nav {
     position: absolute;
-    top: 60px;
+    top: 90px;
     left: 20px;
     bottom: 0;
     width: 300px;
@@ -59,7 +47,6 @@ body {
   li {
     list-style: none;
     margin-bottom: 20px;
-    display: flex;
     align-items: center;
     cursor: pointer;
   }
@@ -68,9 +55,15 @@ body {
     border-radius: 5px;
     width: 200px;
     height: 20px;
-    flex: 1;
-    color: black;
-    background-color: tomato;
   }
- 
-  
+
+  .icon-placeholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+
+  .input-field {
+    display: inline-flex;
+  }
