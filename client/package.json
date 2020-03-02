@@ -1,19 +1,25 @@
 {
-  "name": "icecream",
+  "name": "trip_planner",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
+    "bootstrap": "^4.4.1",
+    "font-awesome": "^4.7.0",
+    "framer-motion": "^1.8.4",
     "joi-browser": "^13.4.0",
     "node-sass": "^4.13.1",
     "react": "^16.12.0",
+    "react-dnd": "^10.0.2",
+    "react-dnd-html5-backend": "^10.0.2",
     "react-dom": "^16.12.0",
+    "react-responsive-carousel": "^3.1.51",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
-    "react-three-fiber": "^4.0.16",
-    "three": "^0.113.2"
+    "reactstrap": "^8.4.1",
+    "styled-components": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

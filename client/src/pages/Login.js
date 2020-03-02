@@ -1,7 +1,8 @@
 import React from "react";
 import Joi from "joi-browser";
-import Form from "./Form";
+import Form from "../components/Form";
 import API from "../utils/API";
+import { motion } from "framer-motion";
 
 class Login extends Form {
   state = {
@@ -10,29 +11,35 @@ class Login extends Form {
   };
 
   schema = {
-    username: Joi.string().required().label("Username"),
-    password: Joi.string().required().label("Password")
+    username: Joi.string()
+      .required()
+      .label("Username"),
+    password: Joi.string()
+      .required()
+      .label("Password")
   };
 
   doSubmit = async () => {
     const { data } = this.state;
-    await API.loginUser(data.username, data.password)
-}
+    await API.loginUser(data.username, data.password);
+  };
 
-render() {
+  render() {
     return (
-      <div>
+      <motion.div
+        exit={{ opacity: 0 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      >
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("username", "Username")}
           {this.renderInput("password", "Password", "password")}
           {this.renderButton("Login")}
         </form>
-      </div>
+      </motion.div>
     );
   }
-
-
 }
 
 export default Login;
