@@ -1,39 +1,31 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Profile from "./pages/Profile";
+import Profile from "./pages/Profile/Profile";
+import Auth from "./pages/Auth/Auth";
+import TopNav from "./components/TopNav/TopNav"
+import UserProvider from "./context";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
-import Login from "./pages/Login";
-import Signup from "./pages/SignUp";
-import NavBar from "./components/Navbar/NavBar"
 // import {AnimatePresence} from "framer-motion";
 
 function App() {
   return (
+    <UserProvider>
     <Router>
       <div>
-        <NavBar/>
+        <TopNav/>
         {/* <AnimatePresence> */}
         <Switch>
-          <Route exact path="/">
-            <About/>
-          </Route>
-          <Route exact path="/profile">
-            <Profile />
-          </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/signup">
-            <Signup />
-          </Route>
-          <Route>
-            <NotFound />
-          </Route>
+        <Route exact path="/" component={About} />
+              <Route exact path="/login" component={() => <Auth action="login" />}  />
+              <Route exact path="/signup" component={() => <Auth action="signup" />}  />
+              <Route exact path="/profile" component={Profile} />
+              <Route component={NotFound} />
         </Switch>
         {/* </AnimatePresence> */}
       </div>
     </Router>
+    </UserProvider>
   );
 }
 

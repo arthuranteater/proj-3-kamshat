@@ -47,6 +47,13 @@ router.post("/signup", function(req, res, next) {
   })
 });
 
+router.get("/unauthorized", function(req, res, next) {
+  res.json({
+    error: req.flash("error"),
+    message: "user not authenticated"
+  });
+});
+
 router.get("/profile", authMiddleware.isLoggedIn, function(req, res, next) {
   res.json({
     user: req.user,
@@ -57,5 +64,13 @@ router.get("/profile", authMiddleware.isLoggedIn, function(req, res, next) {
 router.get("/logout", authMiddleware.logoutUser, function(req, res, next) {
   res.json("User logged out successfully");
 });
+
+router.get("/admin", authMiddleware.isAdmin, function(req, res, next) {
+  res.json({
+    user: req.user,
+    loggedIn: true
+  });
+});
+
 
 module.exports = router;

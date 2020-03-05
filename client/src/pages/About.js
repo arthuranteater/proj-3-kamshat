@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { Component } from "react";
 
-const About = () => {
-    return <div>About App</div>
+class About extends Component {
+  state = {
+    loggedIn: false
+  };
+
+  render() {
+    return (
+        <div>
+          <h1>Hello World</h1>
+        </div>
+    );
+  }
 }
 
 export default About;

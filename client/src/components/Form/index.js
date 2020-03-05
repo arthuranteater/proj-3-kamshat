@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import { Container, FormGroup, Label, Button, Input, Col } from "reactstrap";
 import API from "../../utils/API";
 import countriesList from "../../data/countries.json";
@@ -13,7 +13,8 @@ const CityForm = () => {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const [userInput, setUserInput] = useState({
+  const [userInput, setUserInput] = useState(
+    {
     city: "",
     continent: "",
     country: "",
@@ -21,19 +22,26 @@ const CityForm = () => {
     restaurant: [],
     events: [],
     image: "" 
-  })
+  }
+  )
+
+  const [userCard, setUserCard] = useState([])
+
+  useEffect(() => {
+    console.log(setUserInput)
+  }, [setUserInput])
 
   const handleInputChange = event => {
     const { name, value } = event.target;
-    setUserInput({ ...userInput, [name]: value });
-    
+    setUserInput({...userInput,  [name]: value});
   };
 
 
-  function handleFormSubmit(event) {
+  const handleFormSubmit = async event =>{
     event.preventDefault();
-    setIsSubmitted(true)
-    API.saveCityCard({
+    await setIsSubmitted(true)
+    await setUserCard([...userCard, userInput])
+    await API.saveCityCard({
       city: userInput.city,
       continent: userInput.continent,
       country: userInput.activities,
@@ -116,16 +124,17 @@ const CityForm = () => {
           <Button onClick={handleFormSubmit}>Submit</Button>
         </form>
         {isSubmitted  &&
+        userCard.map(user => 
         <CityCard
-        key={userInput.city}
-        city={userInput.city}
-        country={userInput.country}
-        continent={userInput.continent}
-        restaurant={userInput.restaurant}
-        activities={userInput.activities}
-        events={userInput.events}
-        image={userInput.image}
-        />}
+        key={user.city}
+        city={user.city}
+        country={user.country}
+        continent={user.continent}
+        restaurant={user.restaurant}
+        activities={user.activities}
+        events={user.events}
+        image={user.image}
+        />)}
       </Col>
     </Container>
     

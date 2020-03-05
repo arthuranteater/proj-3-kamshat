@@ -25,8 +25,11 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(routes);
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/tripplaner");
-
-app.listen(PORT, function() {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/tripdb", { useNewUrlParser: true }, function(err) {
+  if (err) throw err;
+  console.log("connected");
+  app.listen(PORT, (err)=> {
+      if (err) throw err;
+      console.log(`connected on port ${PORT}`)
+  });
 });

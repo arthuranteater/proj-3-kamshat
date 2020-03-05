@@ -7,11 +7,14 @@ export const UserConsumer = UserContext.Consumer;
 
 class UserProvider extends Component {
     state = {
+        firstname: "",
+        lastname: "",
         email: "",
+        username: "",
         password: "",
         loggedIn: false,
-        name: "",
-        user: ""
+        user: null,
+        failureMessage: null
     }
 
     componentDidMount() {
@@ -28,9 +31,9 @@ class UserProvider extends Component {
 
     handleLogin = event => {
         event.preventDefault();
-        if (this.state.email && this.state.password) {
+        if (this.state.username && this.state.password) {
             API.login({
-                email: this.state.email,
+                username: this.state.username,
                 password: this.state.password
             }).then(user => {
                 if (user.data.loggedIn) {
@@ -52,9 +55,11 @@ class UserProvider extends Component {
         event.preventDefault();
         if (this.state.username && this.state.password) {
             API.signup({
+                firstname: this.state.firstname,
+                lastname: this.state.lastname,
                 email: this.state.email,
-                password: this.state.password,
-                name: this.state.name
+                username: this.state.username,
+                password: this.state.password
             }).then(user => {
                 if (user.data.loggedIn) {
                     this.setState({
