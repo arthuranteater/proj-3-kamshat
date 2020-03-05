@@ -1,53 +1,53 @@
-import React from "react";
-import Joi from "joi-browser";
-import Form from "../components/Form";
-import API from "../utils/API";
-import { motion } from "framer-motion";
+import React, { Component } from "react";
+import { Button, Form, FormGroup, Label, Input, FormText, Alert } from 'reactstrap';
+import { Link } from "react-router-dom";
 
-class SignUp extends Form {
-  state = {
-    data: { username: "", password: "", name: "" },
-    errors: {}
-  };
+class Signup extends Component {
+    state = {
+        email: "",
+        password: false,
+        name: false
+    }
 
-  schema = {
-    username: Joi.string()
-      .email()
-      .label("Username"),
-    password: Joi.string()
-      .min(8)
-      .required()
-      .label("Password"),
-    name: Joi.string()
-      .required()
-      .label("Name")
-  };
+   handleInputChange = event => {
+        const value = event.target.value;
+        const name = event.target.name;
+        this.setState({
+            [name]: value
+        });
+    }
 
-  doSubmit = async () => {
-    const { data } = this.state;
-    await API.createUser({
-      email: data.username,
-      password: data.password,
-      name: data.name
-    });
-  };
-  render() {
-    return (
-      <motion.div
-        exit={{ opacity: 0 }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-      >
-        <h1>Sign Up</h1>
-        <form onSubmit={this.handleSubmit}>
-          {this.renderInput("username", "Username")}
-          {this.renderInput("password", "Password", "password")}
-          {this.renderInput("name", "Name")}
-          {this.renderButton("Sign Up")}
-        </form>
-      </motion.div>
-    );
-  }
+    render() {
+        return (
+            <div>
+                <h2>Signup</h2>
+                <Form>
+                    <FormGroup>
+                        <Label for="name">Name</Label>
+                        <Input type="text" name="name" id="name" placeholder="Name" value={this.props.name} onChange={this.props.handleInputChange} valid={this.state.valiedName} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="email">Email</Label>
+                        <Input type="email" name="email" id="email" placeholder="email@email.com" value={this.props.email} onChange={this.props.handleInputChange} valid={this.state.valieEmail} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="password">Password</Label>
+                        <Input type="password" name="password" id="password" placeholder="password" value={this.props.password} onChange={this.props.handleInputChange} valid={this.state.validPassword} />
+                        <FormText>{this.state.passwordMessage}</FormText>
+                    </FormGroup>
+                    {/* if all fields are valid, allow the user to submit the form */}
+                    {(this.state.valiedName && this.state.validLastname && this.state.valieEmail && this.state.validUsername && this.state.validPassword && this.state.confirmPassword) ? (
+                        <Button onClick={this.props.handleSignup} color="success" block>Signup</Button>
+                    ) : (
+                        <Button onClick={this.props.handleSignup} color="danger" block disabled>Signup</Button>
+                    )}
+                    <p className="signupLink">
+                        <Link to="/login">Already have an account?  Sign in here</Link>
+                    </p>
+                </Form>
+            </div>
+        );
+    }
 }
 
-export default SignUp;
+export default Signup;

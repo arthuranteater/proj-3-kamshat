@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 
-class NotFound extends Component {
-  render() {
+const NotFound = () => {
     return (
       <motion.div
         exit={{ opacity: 0 }}
@@ -13,6 +12,6 @@ class NotFound extends Component {
       </motion.div>
     );
   }
-}
+
 
 export default NotFound;
