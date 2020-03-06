@@ -29,11 +29,9 @@ router.post("/signup", function(req, res, next) {
         }
         if (!useremail) {
           let newUser = new db.User({
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
             email: req.body.email,
-            username: req.body.username,
-            password: req.body.password
+            password: req.body.password,
+            username: req.body.username
           })
           newUser.password = newUser.generateHash(req.body.password);
           newUser.save(function(err) {
@@ -42,10 +40,12 @@ router.post("/signup", function(req, res, next) {
             res.redirect(307, "/api/users/login")
           });
         }
-      })     
-    }
-  })
-});
+      }) 
+    } 
+    })  
+})
+  
+
 
 router.get("/unauthorized", function(req, res, next) {
   res.json({
@@ -64,13 +64,5 @@ router.get("/profile", authMiddleware.isLoggedIn, function(req, res, next) {
 router.get("/logout", authMiddleware.logoutUser, function(req, res, next) {
   res.json("User logged out successfully");
 });
-
-router.get("/admin", authMiddleware.isAdmin, function(req, res, next) {
-  res.json({
-    user: req.user,
-    loggedIn: true
-  });
-});
-
 
 module.exports = router;
