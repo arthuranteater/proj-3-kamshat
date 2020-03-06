@@ -1,11 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Profile from "./pages/Profile/Profile";
-import Auth from "./pages/Auth/Auth";
-import TopNav from "./components/TopNav/TopNav"
-import UserProvider from "./context";
+import Profile from "./pages/Profile";
+import Login from "./pages/Login";
 import About from "./pages/About";
+import SignupPage from "./pages/SignupPage";
 import NotFound from "./pages/NotFound";
+import TopNavbar from "./components/Navbar/index"
+import UserProvider from "./context";
 // import {AnimatePresence} from "framer-motion";
 
 function App() {
@@ -13,12 +14,12 @@ function App() {
     <UserProvider>
     <Router>
       <div>
-        <TopNav/>
+        <TopNavbar/>
         {/* <AnimatePresence> */}
         <Switch>
         <Route exact path="/" component={About} />
-              <Route exact path="/login" component={() => <Auth action="login" />}  />
-              <Route exact path="/signup" component={() => <Auth action="signup" />}  />
+              <Route exact path="/login" component={Login}  />
+              <Route exact path="/signup" component={SignupPage}  />
               <Route exact path="/profile" component={Profile} />
               <Route component={NotFound} />
         </Switch>
@@ -30,33 +31,3 @@ function App() {
 }
 
 export default App;
-
-// src/App.js
-
-// import React from "react";
-// import NavBar from "./components/NavBar";
-
-// // New - import the React Router components, and the Profile page component
-// import { Router, Route, Switch } from "react-router-dom";
-// import Profile from "./components/Profile";
-// import history from "./utils/history";
-// import PrivateRoute from "./components/PrivateRoute";
-
-// function App() {
-//   return (
-//     <div className="App">
-//       {/* Don't forget to include the history module */}
-//       <Router history={history}>
-//         <header>
-//           <NavBar />
-//         </header>
-//         <Switch>
-//           <Route path="/" exact />
-//           <PrivateRoute path="/profile" component={Profile} />
-//         </Switch>
-//       </Router>
-//     </div>
-//   );
-// }
-
-// export default App;

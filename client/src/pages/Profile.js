@@ -1,15 +1,15 @@
 import React from "react";
-import { UserConsumer } from '../../context';
+import { UserConsumer } from '../context';
 import { Button } from "reactstrap";
 import { Link} from "react-router-dom"
-import CityForm from "../../components/Form/index";
+import CityForm from "../components/Form/index";
 
 
-function Profile(props) {
+const Profile = () => {
     return (
         <UserConsumer>
         {({ data, logout }) => (
-        <div className="profileBox">
+        <div>
             {(data.loggedIn)? (
                 <div>
                     <CityForm/>

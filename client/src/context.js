@@ -7,11 +7,9 @@ export const UserConsumer = UserContext.Consumer;
 
 class UserProvider extends Component {
     state = {
-        firstname: "",
-        lastname: "",
         email: "",
-        username: "",
         password: "",
+        username: "",
         loggedIn: false,
         user: null,
         failureMessage: null
@@ -31,9 +29,9 @@ class UserProvider extends Component {
 
     handleLogin = event => {
         event.preventDefault();
-        if (this.state.username && this.state.password) {
+        if (this.state.email && this.state.password) {
             API.login({
-                username: this.state.username,
+                email: this.state.email,
                 password: this.state.password
             }).then(user => {
                 if (user.data.loggedIn) {
@@ -53,13 +51,11 @@ class UserProvider extends Component {
 
     handleSignup = event => {
         event.preventDefault();
-        if (this.state.username && this.state.password) {
+        if (this.state.email && this.state.password) {
             API.signup({
-                firstname: this.state.firstname,
-                lastname: this.state.lastname,
                 email: this.state.email,
-                username: this.state.username,
-                password: this.state.password
+                password: this.state.password,
+                username: this.state.username
             }).then(user => {
                 if (user.data.loggedIn) {
                     this.setState({

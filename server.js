@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(routes);
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/tripdb", { useNewUrlParser: true }, function(err) {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/tripdatabase", { useNewUrlParser: true }, function(err) {
   if (err) throw err;
   console.log("connected");
   app.listen(PORT, (err)=> {
