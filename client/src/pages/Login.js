@@ -32,7 +32,7 @@ const Login = () => {
                 onChange={inputChange}
               />
             </FormGroup>
-            <Button onClick={handleLogin}>
+            <Button onClick={e => handleLogin(e)}>
               Login
             </Button>
             <p className="signupLink">

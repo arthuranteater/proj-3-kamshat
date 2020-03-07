@@ -8,7 +8,7 @@ import CityForm from "../components/Form/index";
 const Profile = () => {
     return (
         <UserConsumer>
-        {({ data, logout }) => (
+        {({ data, isLoggedIn, logout }) => (
         <div>
             {(data.loggedIn)? (
                 <div>

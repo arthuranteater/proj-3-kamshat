@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Signup = (props) => {
 
     useEffect(() => {
-      console.log(props)
+      console.log('props', props)
     }, [props])
 
     return (
@@ -45,7 +45,11 @@ const Signup = (props) => {
               onChange={props.handleInputChange}
             />
           </FormGroup>
-          <Button onClick={props.handleSignup}>Signup</Button>
+          <Button onClick={e => { 
+            e.preventDefault() 
+          props.handleSignup(e)
+          } 
+          }>Signup</Button>
           <p>
             <Link to="/login">Already have an account? Log in here</Link>
           </p>

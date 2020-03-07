@@ -16,7 +16,7 @@ class UserProvider extends Component {
     }
 
     componentDidMount() {
-        this.isLoggedIn();
+        // this.isLoggedIn();
     }
 
     handleInputChange = event => {
@@ -30,11 +30,12 @@ class UserProvider extends Component {
     handleLogin = event => {
         event.preventDefault();
         if (this.state.email && this.state.password) {
+            console.log('state', this.state)
             API.login({
                 email: this.state.email,
                 password: this.state.password
             }).then(user => {
-                if (user.data.loggedIn) {
+                if (user) {
                     this.setState({
                         loggedIn: true,
                         user: user.data.user
@@ -52,6 +53,7 @@ class UserProvider extends Component {
     handleSignup = event => {
         event.preventDefault();
         if (this.state.email && this.state.password) {
+            console.log('state', this.state)
             API.signup({
                 email: this.state.email,
                 password: this.state.password,
@@ -66,7 +68,7 @@ class UserProvider extends Component {
                     window.location.href = '/profile';
                 } else {
                     console.log("something went wrong :(")
-                    console.log(user.data);
+                    console.log('user-data', user.data);
                     this.setState({
                         failureMessage: user.data
                     })
@@ -79,6 +81,7 @@ class UserProvider extends Component {
         if (!this.state.loggedIn) {
             API.isLoggedIn().then(user => {
                 if(user.data.loggedIn) {
+                    console.log('passed login')
                     this.setState({
                         loggedIn: true,
                         user: user.data.user
